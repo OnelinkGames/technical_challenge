@@ -1,0 +1,38 @@
+<nav aria-label="Pagination">
+  <a href="#" (click)="select($event, 0)" [attr.aria-disabled]="pagination().first ? true : null">
+    &lt;&lt;
+  </a>
+  <a
+    href="#"
+    (click)="select($event, pagination().number - 1)"
+    [attr.aria-disabled]="pagination().first ? true : null"
+  >
+    &lt;
+  </a>
+
+  @for (page of pages(); track page) {
+    <a
+      href="#"
+      (click)="select($event, page - 1)"
+      [class.current]="page === pagination().number + 1"
+      [attr.aria-current]="page === pagination().number + 1 ? 'page' : null"
+    >
+      {{ page }}
+    </a>
+  }
+
+  <a
+    href="#"
+    (click)="select($event, pagination().number + 1)"
+    [attr.aria-disabled]="pagination().last ? true : null"
+  >
+    &gt;
+  </a>
+  <a
+    href="#"
+    (click)="select($event, pagination().totalPages - 1)"
+    [attr.aria-disabled]="pagination().last ? true : null"
+  >
+    &gt;&gt;
+  </a>
+</nav>

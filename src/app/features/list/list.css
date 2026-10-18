@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.movies {
+  table-layout: fixed;
+}
+
+.col-id {
+  width: 3.5rem;
+}
+
+.col-year,
+.col-winner {
+  width: 7rem;
+}
+
+.column-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.column-header input,
+.column-header select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}

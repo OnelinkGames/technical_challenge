@@ -1,0 +1,76 @@
+<h3>List movies</h3>
+
+<form>
+  <table class="movies">
+    <colgroup>
+      <col class="col-id" />
+      <col class="col-year" />
+      <col class="col-title" />
+      <col class="col-winner" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>
+          <div class="column-header">
+            <span>Year</span>
+            <input
+              type="text"
+              name="year"
+              aria-label="Year"
+              [ngModel]="year()"
+              (ngModelChange)="onYearChange($event)"
+            />
+          </div>
+        </th>
+        <th>Title</th>
+        <th>
+          <div class="column-header">
+            <span>Winner?</span>
+            <select
+              name="winner"
+              aria-label="Winner?"
+              [ngModel]="winner()"
+              (ngModelChange)="onWinnerChange($event)"
+            >
+              <option value="">Yes/No</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (pagination(); as page) {
+        @for (movie of page.content; track movie.id) {
+          <tr>
+            <td>{{ movie.id }}</td>
+            <td>{{ movie.year }}</td>
+            <td>{{ movie.title }}</td>
+            <td>{{ movie.winner ? 'Yes' : 'No' }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="4">
+              <app-empty-state message="No results found." />
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          @if (pagination(); as page) {
+            <app-paginator
+              class="pagination"
+              [pagination]="page"
+              (pageChange)="onPageChange($event)"
+            />
+          }
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</form>

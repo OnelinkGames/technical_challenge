@@ -1,0 +1,6 @@
+@for (toast of toasts(); track toast.id) {
+  <article class="toast">
+    <p>{{ toast.message }}</p>
+    <button type="button" aria-label="Close" (click)="dismiss(toast.id)">×</button>
+  </article>
+}

@@ -1,0 +1,164 @@
+<h1>Dashboard</h1>
+
+<section class="cards">
+  <app-card title="List years with multiple winners">
+    <table>
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Win Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (years(); as data) {
+          @for (item of data.years; track item.year) {
+            <tr>
+              <td>{{ item.year }}</td>
+              <td>{{ item.winnerCount }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="2">
+                <app-empty-state message="No results found." />
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </app-card>
+
+  <app-card title="Top 3 studios with winners">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Win Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (topStudios(); as studios) {
+          @for (studio of studios; track studio.name) {
+            <tr>
+              <td>{{ studio.name }}</td>
+              <td>{{ studio.winCount }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="2">
+                <app-empty-state message="No results found." />
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </app-card>
+
+  <app-card title="Producers with longest and shortest interval between wins">
+    <h3>Maximum</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Producer</th>
+          <th>Interval</th>
+          <th>Previous Year</th>
+          <th>Following Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (producers(); as data) {
+          @for (item of data.max; track item.producer + item.previousWin) {
+            <tr>
+              <td>{{ item.producer }}</td>
+              <td>{{ item.interval }}</td>
+              <td>{{ item.previousWin }}</td>
+              <td>{{ item.followingWin }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4">
+                <app-empty-state message="No results found." />
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+
+    <h3>Minimum</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Producer</th>
+          <th>Interval</th>
+          <th>Previous Year</th>
+          <th>Following Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (producers(); as data) {
+          @for (item of data.min; track item.producer + item.previousWin) {
+            <tr>
+              <td>{{ item.producer }}</td>
+              <td>{{ item.interval }}</td>
+              <td>{{ item.previousWin }}</td>
+              <td>{{ item.followingWin }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4">
+                <app-empty-state message="No results found." />
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </app-card>
+
+  <app-card title="List movie winners by year">
+    <div class="winner-search">
+      <input
+        type="text"
+        name="year"
+        placeholder="search by year"
+        aria-label="Search by year"
+        [ngModel]="year()"
+        (ngModelChange)="year.set($event)"
+      />
+      <button type="button" aria-label="Search" (click)="searchWinners()">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="M15.5 15.5 L20 20" />
+        </svg>
+      </button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Year</th>
+          <th>Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (winners(); as movies) {
+          @for (movie of movies; track movie.id) {
+            <tr>
+              <td>{{ movie.id }}</td>
+              <td>{{ movie.year }}</td>
+              <td>{{ movie.title }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="3">
+                <app-empty-state message="No results found." />
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </app-card>
+</section>

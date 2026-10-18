@@ -1,0 +1,30 @@
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+}
+
+a {
+  color: #333333;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+}
+
+a:link,
+a:visited {
+  color: hsl(209, 100%, 23%);
+}
+
+a:hover {
+  background: #bdbdbd;
+}
+
+a.current,
+a.current:link,
+a.current:visited,
+a.current:hover {
+  background: #0d6efd;
+  color: #ffffff;
+}
